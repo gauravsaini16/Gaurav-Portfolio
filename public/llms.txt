@@ -1,0 +1,42 @@
+# Gaurav Saini — Full-Stack Developer
+
+> Gaurav Saini is a full-stack developer from India who builds responsive websites, web applications, backend systems, databases, and AI-powered solutions.
+
+## Services
+
+### Full-Stack Web Applications
+Responsive applications with frontend interfaces, backend services, authentication, dashboards, and deployment.
+
+### Business Websites and Portfolios
+Modern websites and landing pages for businesses, professionals, and personal brands.
+
+### Backend APIs and Database Systems
+REST APIs, authentication, database architecture, CRUD systems, business logic, and third-party integrations.
+
+### AI Features and Workflow Automation
+AI API integrations, smart assistants, custom tools, content features, and automated workflows.
+
+## Technical Skills
+
+- Frontend: React, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS
+- Backend: Node.js, Express, Laravel, PHP, Python
+- Databases: MongoDB, PostgreSQL, MySQL
+- Tools: Git, Vercel, Netlify, Postman
+
+## Experience
+
+- Junior Full-Stack Developer — July 2026 to present
+- SDE Intern — February 2026 to June 2026
+
+## Availability
+
+Available for freelance full-stack development projects. Use the website contact page to discuss a project by email or WhatsApp.
+
+## Site Pages
+
+- Home: /
+- Projects: /projects
+- Services: /services
+- About: /about
+- Contact: /contact
+- Machine-readable JSON: /api/llms
