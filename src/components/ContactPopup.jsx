@@ -10,6 +10,7 @@ import { COUNTRIES } from "@/app/contact/content";
 export default function ContactPopup({ isOpen, onClose }) {
   const [step, setStep]       = useState("choose");
   const [name, setName]       = useState("");
+  const [email, setEmail]     = useState("");
   const [phone, setPhone]     = useState("");
   const [reason, setReason]   = useState("");
   const [status, setStatus]   = useState("idle"); // idle | sending | sent | error
@@ -20,7 +21,7 @@ export default function ContactPopup({ isOpen, onClose }) {
   // Reset on open
   useEffect(() => {
     if (isOpen) {
-      setStep("choose"); setName(""); setPhone(""); setReason(""); setStatus("idle");
+      setStep("choose"); setName(""); setEmail(""); setPhone(""); setReason(""); setStatus("idle");
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -37,7 +38,7 @@ export default function ContactPopup({ isOpen, onClose }) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email: "", message: reason }),
+        body: JSON.stringify({ name, email, message: reason }),
       });
       setStatus(res.ok ? "sent" : "error");
     } catch { setStatus("error"); }
@@ -138,6 +139,7 @@ export default function ContactPopup({ isOpen, onClose }) {
             ) : (
               <form onSubmit={handleEmail} className="flex flex-col gap-3">
                 <input suppressHydrationWarning className={inputCls} placeholder="Your name" required value={name} onChange={e => setName(e.target.value)} />
+                <input suppressHydrationWarning className={inputCls} type="email" autoComplete="email" placeholder="Your email" required value={email} onChange={e => setEmail(e.target.value)} />
                 <textarea suppressHydrationWarning className={inputCls + " resize-none"} rows={4} placeholder="What's the project about?" required value={reason} onChange={e => setReason(e.target.value)} />
                 {status === "error" && <p className="text-red-400 text-xs">Something went wrong. Try again.</p>}
                 <button

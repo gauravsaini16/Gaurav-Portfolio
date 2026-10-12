@@ -20,28 +20,6 @@ CREATE TABLE public.inquiries (
   CONSTRAINT inquiries_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE public.projects (
-  id uuid NOT NULL DEFAULT gen_random_uuid(),
-  title text NOT NULL,
-  description text,
-  category text,
-  tech text,
-  photo_url text,
-  link text,
-  review text,
-  num text,
-  sort_order integer DEFAULT 0,
-  visible boolean DEFAULT true,
-  created_at timestamp with time zone DEFAULT now(),
-  gallery jsonb DEFAULT '[]'::jsonb,
-  client text NOT NULL DEFAULT ''::text,
-  month text NOT NULL DEFAULT ''::text,
-  year text NOT NULL DEFAULT ''::text,
-  logo_full_view_url text NOT NULL DEFAULT ''::text,
-  desktop_view_url text NOT NULL DEFAULT ''::text,
-  phone_view_url text NOT NULL DEFAULT ''::text,
-  CONSTRAINT projects_pkey PRIMARY KEY (id)
-);
 
 CREATE TABLE public.reviews (
   id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
@@ -69,13 +47,6 @@ CREATE TABLE public.settings (
   key text NOT NULL,
   value jsonb NOT NULL DEFAULT 'false'::jsonb,
   CONSTRAINT settings_pkey PRIMARY KEY (key)
-);
-
-CREATE TABLE public.subscribers (
-  id uuid NOT NULL DEFAULT uuid_generate_v4(),
-  email text NOT NULL UNIQUE,
-  created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT subscribers_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE public.visits (
@@ -119,16 +90,8 @@ CREATE TABLE public.works (
 
 -- ── STORAGE BUCKETS ──
 
--- Create projects storage bucket
+-- Create the storage bucket used by /api/upload
 INSERT INTO storage.buckets (id, name, public) 
-VALUES ('projects', 'projects', true)
+VALUES ('project-photos', 'project-photos', true)
 ON CONFLICT (id) DO NOTHING;
 
--- Storage policies for projects bucket
--- Allows anyone to view project images
-CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'projects');
-
--- Allows authenticated uploads (admin only if RLS is configured correctly)
-CREATE POLICY "Admin Upload" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'projects');
-CREATE POLICY "Admin Update" ON storage.objects FOR UPDATE USING (bucket_id = 'projects');
-CREATE POLICY "Admin Delete" ON storage.objects FOR DELETE USING (bucket_id = 'projects');

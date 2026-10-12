@@ -2,7 +2,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import TrackVisit from "@/components/TrackVisit";
 import { Analytics } from "@vercel/analytics/next";
-import NewsletterPopup from "@/components/NewsletterPopup";
 
 const inter = localFont({
   src: "./fonts/inter-latin.woff2",
@@ -227,7 +226,6 @@ export default function RootLayout({ children }) {
         <div className="bottom-blur" aria-hidden="true" />
         {children}
         <Analytics />
-        <NewsletterPopup />
       </body>
     </html>
   );
